@@ -1,0 +1,14 @@
+CREATE TABLE SkincareStore (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER);
+
+INSERT INTO SkincareStore VALUES 
+(1, "Moisturiser", 5, 10),
+(2, "Toner", 2, 15),
+(3, "Undereye serum", 3, 14),
+(4, "Whole face serum", 4, 9),
+(5, "Shampoo", 6, 8),
+(6, "Conditioner", 5, 9),
+(7, "Rosehip oil", 3, 9),
+(10, "Lip balm", 4, 20);
+SELECT*FROM "SkincareStore" 
+
+This code displays my skincare shop, the items I sell, their price, and quantity. 
