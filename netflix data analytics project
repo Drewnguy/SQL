@@ -1,4 +1,4 @@
-This project uses the following Netflix data to answer questions below using PostgresSQL
+This project uses the following Netflix data to form insights into the content that Netflix hosts using PostgresSQL language
 ///
 CREATE TABLE netflix_titles_info
     ("show_id" varchar(5), "type" varchar(7), "title" varchar(58), "country" varchar(74), "date_added" timestamp, "release_year" int, "rating" varchar(5), "duration" varchar(9), "listed_in" varchar(74))
