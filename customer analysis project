@@ -1,0 +1,50 @@
+In this project I will be querying a database of customers and product sales 
+
+Write a query that will remove unusable data from the customers table:
+SELECT * FROM BIT_DB.customers
+WHERE LENGTH(order_id)=6
+AND order_id<>’Order ID’;
+
+How many orders were placed in January?
+SELECT COUNT(orderID) 
+FROM BIT_DB.JanSales 
+WHERE orderID<>’Order ID’
+AND LENGTH(orderID)=6;
+
+How many orders were placed for an iPhone in January?
+SELECT COUNT(Product) 
+FROM BIT_DB.JanSales 
+WHERE Product='iPhone'
+AND orderID<>'Order ID'
+AND LENGTH(orderID)=6;
+
+Select all customer account numbers of orders placed in February:
+SELECT DISTINCT acctnum 
+FROM BIT_DB.customers AS customer
+INNER JOIN BIT_DB.FebSales feb_id
+ON feb_id.orderID=customer.order_id
+WHERE LENGTH(orderID)=6
+AND orderID<>'Order ID’;
+
+What is the total revenue for each product in January?
+SELECT product, SUM(Quantity)*price AS revenue
+FROM BIT_DB.JanSales
+GROUP BY product;
+
+What products were sold in February at 548 Lincoln St, Seattle, WA 98101 and what was the total revenue?
+SELECT Product, SUM(Quantity) AS total_sold
+SUM(Quantity)*price AS revenue,
+location
+FROM BIT_DB.FebSales
+WHERE location='548 Lincoln St, Seattle, WA 98101'
+GROUP BY Product
+
+How many customers ordered more than 2 products at a time in February and what was the average amount spent for those customers? 
+SELECT COUNT(DISTINCT cust.acctnum),
+avg(Quantity*price)
+FROM BIT_DB.FebSales feb
+LEFT JOIN BIT_DB.customers cust
+ON feb.orderID=cust.order_id
+WHERE feb.Quantity>1
+AND LENGTH(feb.orderID)=6
+AND feb.orderID<>'Order ID'
