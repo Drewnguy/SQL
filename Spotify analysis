@@ -13,32 +13,33 @@ SELECT artist_name,
 avg_popularity,
 'Top star' as tag
 FROM avg_pop_CTE
-WHERE avg_popularity>=90
+WHERE avg_popularity>=90;
 
 What were the 10 most popular songs?
 
 SELECT track_name,
 popularity
 FROM Spotifydata
-ORDER BY popularity desc LIMIT 10
+ORDER BY popularity desc LIMIT 10;
 
 What was the combined average duration of all top 50 songs?
 
 SELECT 
 SUM(duration_ms)/COUNT(track_name) as avg_duration
-FROM Spotifydata
+FROM Spotifydata;
 
 How many times did Dua Lipa enter the top 50?
 
 SELECT COUNT(artist_name)
 FROM Spotifydata 
-WHERE artist_name='Dua Lipa’
+WHERE artist_name='Dua Lipa’;
 
 What was the longest song released?
 
 SELECT track_name,
 MAX(duration_ms)
 FROM Spotifydata 
-ORDER BY MAX(duration_ms) DESC LIMIT 1
+GROUP BY track_name
+ORDER BY MAX(duration_ms) DESC LIMIT 1;
 
 
