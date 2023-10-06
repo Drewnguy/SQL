@@ -34,7 +34,7 @@ SELECT COUNT(artist_name)
 FROM Spotifydata 
 WHERE artist_name='Dua Lipa’;
 
-What was the longest song released?
+What was the longest song released among the top 50 songs?
 
 SELECT track_name,
 MAX(duration_ms)
