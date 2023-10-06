@@ -1,11 +1,13 @@
 In this project I will be querying a database of customers and product sales.
 
-Write a query that will remove unusable data from the customers table:
+Write a query that will remove unusable data from the customers table.
+
 SELECT * FROM BIT_DB.customers
 WHERE LENGTH(order_id)=6
 AND order_id<>’Order ID’;
 
 How many orders were placed in January?
+
 SELECT COUNT(orderID) 
 FROM BIT_DB.JanSales 
 WHERE orderID<>’Order ID’
@@ -18,7 +20,8 @@ WHERE Product='iPhone'
 AND orderID<>'Order ID'
 AND LENGTH(orderID)=6;
 
-Select all customer account numbers of orders placed in February:
+Select all customer account numbers of orders placed in February.
+
 SELECT DISTINCT acctnum 
 FROM BIT_DB.customers AS customer
 INNER JOIN BIT_DB.FebSales feb_id
@@ -27,11 +30,13 @@ WHERE LENGTH(orderID)=6
 AND orderID<>'Order ID’;
 
 What is the total revenue for each product in January?
+
 SELECT product, SUM(Quantity)*price AS revenue
 FROM BIT_DB.JanSales
 GROUP BY product;
 
 What products were sold in February at 548 Lincoln St, Seattle, WA 98101 and what was the total revenue?
+
 SELECT Product, SUM(Quantity) AS total_sold
 SUM(Quantity)*price AS revenue,
 location
@@ -40,6 +45,7 @@ WHERE location='548 Lincoln St, Seattle, WA 98101'
 GROUP BY Product;
 
 How many customers ordered more than 2 products at a time in February and what was the average amount spent for those customers? 
+
 SELECT COUNT(DISTINCT cust.acctnum),
 avg(Quantity*price)
 FROM BIT_DB.FebSales feb
@@ -50,6 +56,7 @@ AND LENGTH(feb.orderID)=6
 AND feb.orderID<>'Order ID'
 
 List all products sold in Los Angeles in February and include how many of each were sold.
+
 SELECT Product,
 SUM(Quantity)
 FROM BIT_DB.FebSales 
@@ -57,6 +64,7 @@ WHERE location LIKE '%Los Angeles%'
 GROUP BY Product
 
 What product brought in the most revenue in January?
+
 SELECT Product,
 SUM(Quantity*price) AS revenue
 FROM BIT_DB.JanSales
@@ -65,6 +73,7 @@ ORDER BY revenue desc
 LIMIT 1;
 
 Which locations in New York made at least 3 orders in January?
+
 SELECT location,
 COUNT(orderID)
 FROM BIT_DB.JanSales
@@ -75,6 +84,7 @@ GROUP BY location
 HAVING COUNT(orderID)>2;
 
 How many of each type of headphone was sold in February?
+
 SELECT 
 Product,
 SUM(Quantity) 
@@ -83,6 +93,7 @@ WHERE Product LIKE '%headphone%'
 GROUP BY Product;
 
 What is the average spend per account in February?
+
 SELECT SUM(Quantity*price)/COUNT(cust.acctnum)
 FROM BIT_DB.FebSales feb
 LEFT JOIN BIT_DB.customers cust
@@ -91,9 +102,19 @@ WHERE LENGTH(feb.orderID)=6
 AND feb.orderID<>'Order ID’;
 
 What is the average quantity of product bought per account in February?
+
 SELECT SUM(Quantity)/COUNT(cust.acctnum)
 FROM BIT_DB.FebSales feb
 LEFT JOIN BIT_DB.customers cust
 ON cust.order_id=feb.orderID
 WHERE LENGTH(feb.orderID)=6
 AND feb.orderID<>'Order ID';
+
+What product brought in the most revenue in January and how much revenue did it bring in total?
+
+SELECT Product,
+SUM(Quantity*price) AS revenue
+FROM BIT_DB.JanSales
+GROUP BY Product
+ORDER BY revenue desc 
+LIMIT 1;
