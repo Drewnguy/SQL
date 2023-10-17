@@ -1,3 +1,5 @@
+//In this analysis I will proceed to query the following data using SQL:
+
 FORTUNE 500 Company Data:
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,
@@ -57,45 +59,61 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
--In this query, I will use the GROUP BY and ORDER BY query to answer the question: "Which industries generate the highest average revenue?"
-SELECT industry, AVG(revenue) AS "average_revenue"
+1. In this query, I will use the "GROUP BY" and "ORDER BY" statement to answer the question: 
+"Which industries generate the highest average revenue?"
+
+SELECT industry, 
+AVG(revenue) AS "avg_revenue"
 FROM fortune_companies
 GROUP BY industry
-ORDER BY average_revenue;
+ORDER BY avg_revenue;
 
--In this query I will use the CASE statement to answer the question: "Which companies demonstrate high average tenure in their employees?"
+2. In this query I will use the "CASE" statement to answer the question: 
+"Which companies demonstrate high tenure in their employees?"
 With >7 years being high, >5 being normal average, and below 5 years to be considered low tenure.  
-SELECT company_name, industry, avg_employee_tenure,
+
+SELECT company_name, 
+industry, 
+avg_employee_tenure,
 CASE
-  WHEN avg_employee_tenure >7 THEN "high avg tenure"
-  WHEN avg_employee_tenure >5 THEN "normal avg tenure"
-  ELSE "low avg tenure"
+  WHEN avg_employee_tenure >7 THEN "high_avg_tenure"
+  WHEN avg_employee_tenure >5 THEN "normal_avg_tenure"
+  ELSE "low_avg_tenure"
   END AS avg_tenure
- FROM fortune_companies;
+FROM fortune_companies;
 
--In this query I will use the AVG, GROUP BY, and ORDER BY statements to answer the question: "Which industries on average employ at least 1500 people?"
- SELECT industry, AVG(employees) AS average_employees
- FROM fortune_companies
- GROUP BY industry
- HAVING average_employees>1500
- ORDER BY average_employees;
+3. In this query I will use the "AVG", "GROUP BY", and "ORDER BY" statements to answer the question: 
+"Which industries on average employ at least 1500 people?"
+ 
+SELECT industry,
+AVG(employees) AS avg_employees
+FROM fortune_companies
+GROUP BY industry
+HAVING avg_employees>1500
+ORDER BY avg_employees ASC;
 
--In this query I will use the COUNT and CASE statement to answer the question: "How many out of the fortune companies offer maternity leave 
-of 6, 8, and 12 weeks?"
+4. In this query I will use the "COUNT" and "CASE" statement to answer the question: 
+"How many out of the fortune companies offer maternity leave of 6, 8, and 12 weeks?"
+
 SELECT COUNT(*), 
-CASE
-WHEN maternity_leave_weeks >12 THEN "12 weeks of maternity leave"
-WHEN maternity_leave_weeks >8 THEN "8 weeks of maternity leave"
-WHEN maternity_leave_weeks >6 THEN "6 weeks of maternity leave"
-ELSE "below 6 weeks of maternity leave"
-END AS "maternity_leave_duration"
+    CASE
+        WHEN maternity_leave_weeks >12 THEN "12 weeks of maternity leave"
+        WHEN maternity_leave_weeks >8 THEN "8 weeks of maternity leave"
+        WHEN maternity_leave_weeks >6 THEN "6 weeks of maternity leave"
+        ELSE "below 6 weeks of maternity leave"
+    END AS "maternity_leave_duration"
 FROM fortune_companies
 GROUP BY maternity_leave_duration;
 
--In this query I will use the WHERE and AND statement to answer the question: "Which companies offer healthcare benefits and paid time off of more than 15 days?"
-SELECT company_name, healthcare_benefits, paid_time_off_days
+5. In this query I will use the "WHERE" and "AND" statement to answer the question: 
+"Which companies offer healthcare benefits and paid time off of more than 15 days?"
+
+SELECT company_name, 
+healthcare_benefits, 
+paid_time_off_days
 FROM fortune_companies
-WHERE healthcare_benefits>0 AND paid_time_off_days >15;
+WHERE healthcare_benefits>0 
+AND paid_time_off_days>15;
 
 
 
