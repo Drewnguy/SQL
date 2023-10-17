@@ -1,4 +1,4 @@
-//In the following code I will proceed to create a table that displays data about a skincare shop including
+//I will proceed to create a table that displays data about a skincare shop including
 what kinds of products are being sold, their price, and quantity. 
 
 CREATE TABLE SkincareStore (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER);
