@@ -61,35 +61,48 @@ VALUES
 ///
 
 1. Join both sets of data into one table
-SELECT shows.show_id, shows.type, shows.title, shows.country, people.director, people.cast
+
+SELECT shows.show_id, 
+shows.type, 
+shows.title, 
+shows.country, 
+people.director, 
+people.cast
 FROM "netflix_titles_info" shows
 JOIN "netflix_people" people
 ON people.show_id=shows.show_id;
 
 2. How many movie titles are there?
+
 SELECT COUNT(*) 
 FROM "netflix_titles_info"
 WHERE type='Movie';
 
 3. When was the most recently added show?
+
 SELECT max(date(date_added))
 FROM "netflix_titles_info";
 
 4. List all movies and tv shows in alphabetical order
+
 SELECT title
 FROM "netflix_titles_info"
 ORDER BY title asc;
 
 5. Who was the director for the movie The Starling?
-SELECT people.director, titles.title
-FROM "netflix_titles_info" titles
-LEFT OUTER JOIN "netflix_people" people
-ON titles.show_id=people.show_id
-WHERE titles.title='The Starling’;
 
-6. What is the oldest movie in the data set and what year was it made?
-SELECT title, release_year
+SELECT p.director, 
+t.title
+FROM "netflix_titles_info" t
+LEFT OUTER JOIN "netflix_people" p
+ON t.show_id=p.show_id
+WHERE t.title='The Starling’;
+
+6. What is the oldest movie in the data set?
+
+SELECT title, 
+release_year
 FROM "netflix_titles_info" 
-ORDER BY release_year asc
+ORDER BY release_year ASC
 LIMIT 1;
 
