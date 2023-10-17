@@ -1,12 +1,12 @@
-This project will utilize data from the Spotify top 50 songs in 2021
+//This project will utilize data from the Spotify top 50 songs in 2021
 
-Calculate the average popularity of artists, and for each artist with a score of 90 or above label them as Top Stars. 
+1. Calculate the average popularity of artists, and for each artist with a score of 90 or above label them as Top Stars. 
 
 WITH avg_pop_CTE as (
-    SELECT s.artist_name,
-    AVG(s.popularity) as avg_popularity
-    FROM Spotifydata s
-    GROUP BY s.artist_name
+    SELECT artist_name,
+    AVG(popularity) as avg_popularity
+    FROM Spotifydata 
+    GROUP BY artist_name
     )
     
 SELECT artist_name,
@@ -15,26 +15,26 @@ avg_popularity,
 FROM avg_pop_CTE
 WHERE avg_popularity>=90;
 
-What were the 10 most popular songs?
+2. What were the 10 most popular songs?
 
 SELECT track_name,
 popularity
 FROM Spotifydata
 ORDER BY popularity desc LIMIT 10;
 
-What was the combined average duration of all top 50 songs?
+3. What was the combined average duration of the top 50 songs?
 
 SELECT 
 SUM(duration_ms)/COUNT(track_name) as avg_duration
 FROM Spotifydata;
 
-How many times did Dua Lipa enter the top 50?
+4. How many times did Dua Lipa enter the top 50?
 
 SELECT COUNT(artist_name)
 FROM Spotifydata 
 WHERE artist_name='Dua Lipa’;
 
-What was the longest song released among the top 50 songs?
+5. What was the longest song released among the top 50 songs?
 
 SELECT track_name,
 MAX(duration_ms)
