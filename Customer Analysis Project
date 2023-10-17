@@ -71,7 +71,7 @@ SELECT Product,
 SUM(Quantity*price) AS revenue
 FROM BIT_DB.JanSales
 GROUP BY Product
-ORDER BY SUM(Quantity*price) DESC
+ORDER BY revenue DESC
 LIMIT 1;
 
 10. Which locations in New York made at least 3 orders in January?
@@ -112,11 +112,4 @@ ON c.order_id=feb.orderID
 WHERE LENGTH(feb.orderID)=6
 AND feb.orderID<>'Order ID';
 
-14. What product brought in the most revenue in January?
 
-SELECT Product,
-SUM(Quantity*price) AS revenue
-FROM BIT_DB.JanSales
-GROUP BY Product
-ORDER BY revenue DESC 
-LIMIT 1;
